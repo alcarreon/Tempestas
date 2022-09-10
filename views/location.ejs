@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<title>Saved Locations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+<body class="is-preload">
+
+    <!-- Wrapper-->
+        <div id="wrapper">
+
+            <!-- Nav -->
+                <nav id="nav">
+                    <a href="#" class="icon solid fa-home"><span>Home</span></a>
+                    <a href="#work" class="icon solid fa-folder"><span>Work</span></a>
+                    <a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
+                    <a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a>
+                </nav>
+
+            <!-- Main -->
+                <div id="main">
+                    
+                    
+                    <!-- Me -->
+							<article id="home" class="panel intro">
+								<header>
+                                    <% if(todos.length === 0){ %>
+                                        <h2>Weather for <%= defaults[0].zip%></h2>
+                                        <h3>The max temp was <%= defaults[0].days[0].tempmax%></h3>
+                                 <h3>The min temp was <%= defaults[0].days[0].tempmin%></h3>
+                                     <% } else{ %>
+                                        <% todos.forEach(el => { %>
+
+                                            <% if(el.checked === true){ %>
+                                                <h2>Weather for <%= el.zip%></h2>
+                                                <h3>The max temp was <%= el.days[0].tempmax%></h3>
+                                 <h3>The min temp was <%= el.days[0].tempmin%></h3>
+                                             <% }%>
+                                         <% }); %>
+                                      <% } %>
+
+
+
+
+                                    
+									
+                                     
+
+									
+								</header>
+								<a href="/#contact" class="jumplink pic">
+									<span class="arrow icon solid fa-chevron-right"><span>Log In</span></span>
+									<img src="images/me.jpg" alt="" />
+								</a>
+							</article>
+
+                    
+                    <!-- Work -->
+                        <article id="work" class="panel">
+                            <header>
+                                <h2>My Weather</h2>
+                            </header>
+                            <a href="/logout">Logout</a>
+                            <form action="/location/createLocation" method='POST'>
+                                <input type="number" placeholder="Enter ZipCode" name='zipLocation' >
+                                <input type="submit">
+                            </form>
+                            <h1>Saved Locations</h1>
+
+                            
+                            <% if(todos.length === 0){ %>
+                                <h2>Weather for <%= defaults[0].zip%></h2>
+                                <section>
+                                    <div class="row">
+                                        
+                                        
+                                                                               
+                                            
+                                        <div class="profiles">
+                                            <% defaults.forEach(el => { %>
+                
+                                                
+                                                    <% for(let j = 0; j < defaults[0].days.length; j++){%>
+        
+                                                        
+    
+                                                        <div class="profile">
+                                                            <div class="image">
+                                                                <img src="images/pic05.jpg" alt="" />
+                                                            </div>
+                                                            <div class="content">
+                                                                <h3>The max temp was <%= el.days[j].tempmax%></h3>
+                                                                <h3>The min temp was <%= el.days[j].tempmin%></h3>
+                                                                
+                                                                <ul class="actions">
+                                                                    <li><a href="#" class="button small">More</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        
+                                                   
+                                                  <% } %>
+                
+                                             <% }); %> 
+                                            
+                                            
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </section>
+                                
+                             <% } else{ %>
+
+                                <% let holder = todos.slice(-1)%>
+                                <% let counter = 0%>
+                                
+                            
+                            <% todos.forEach((el,index )=> { %>
+                                
+
+                                <% if(el.checked === true){ %>
+                                    <% counter += 1%>
+                                    <h2><%= el.zip%></h2>
+                                 <% } else if (counter == 0 & index == todos.length - 1){ %>
+                                 
+                                    
+                                    <h2><%= holder[0].zip%></h2>
+                                  <% } %>
+
+                             <% }); %> 
+
+
+                            
+                                
+                            <ul>
+                                <% todos.forEach( el => { %>
+                                <li class='zipLocation' data-id='<%=el._id%>'>
+                                <span class= "zip"><%= el.zip  %></span>
+                                <span class='del'> Delete </span>
+                                </li>
+                                <% }) %>    
+                               </ul>
+
+                            <!-- <p>
+                                Phasellus enim sapien, blandit ullamcorper elementum eu, condimentum eu elit.
+                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+                                luctus elit eget interdum.
+                            </p> -->
+                            <section>
+                                <div class="row">
+                                    
+                                    
+                                                                           
+                                        
+                                    <div class="profiles">
+                                        <% todos.forEach(el => { %>
+            
+                                            <% if (el.checked === true) { %>
+                                                <% for(let j = 0; j < todos[0].days.length; j++){%>
+    
+                                                    
+
+                                                    <div class="profile">
+                                                        <div class="image">
+                                                            <img src="images/pic05.jpg" alt="" />
+                                                        </div>
+                                                        <div class="content">
+                                                            <h3>The max temp was <%= el.days[j].tempmax%></h3>
+                                                            <h3>The min temp was <%= el.days[j].tempmin%></h3>
+                                                            
+                                                            <ul class="actions">
+                                                                <li><a href="#" class="button small">More</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    
+                                                <% } %>
+                                              <% } %>
+            
+                                         <% }); %> 
+                                        
+                                        
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </section>
+                                
+                                 <% } %>
+                              
+
+
+
+
+
+
+                            
+                        </article>
+
+
+            <!-- Footer -->
+                <div id="footer">
+                    <a href="/logout">Logout</a>
+                    <ul class="copyright">
+                        <li>&copy; Untitled.</li>
+                    </ul>
+                </div>
+
+        </div>
+
+    <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+
+</body>
+<!-- <body>
+    <h1>Saved Locations</h1>
+
+    <form action="/location/createLocation" method='POST'>
+        <input type="number" placeholder="Enter Todo Item" name='zipLocation'>
+        <input type="submit">
+    </form>
+
+    <a href="/logout">Logout</a>
+
+    <script src="js/main.js"></script>
+</body> -->
+</html>
